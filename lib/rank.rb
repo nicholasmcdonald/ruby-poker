@@ -1,33 +1,23 @@
 class Rank
-	ALL = Hash.new
+	attr_reader :name
 
-	attr_reader :name, :value
-
-	def initialize(name, value)
+	def initialize(name)
 		@name = name
-		@value = value
 	end
 
-	def self.setup
-		ALL[:empty] = self.new("Empty", 0)
-		ALL[:ace] = self.new("Ace", 1)
-	end
-
-	def self.allRanks
-		
-	end
-
-	EMPTY = 0
-end
-
-module CardRanks
-	EMPTY = 0
-end
-
-include CardRanks
-
-Rank::setup
-
-Rank::ALL.each do |symbol, name|
-	puts symbol
+	ALL = [
+		self.new(:two),
+		self.new(:three),
+		self.new(:four),
+		self.new(:five),
+		self.new(:six),
+		self.new(:seven),
+		self.new(:eight),
+		self.new(:nine),
+		self.new(:ten),
+		self.new(:jack),
+		self.new(:queen),
+		self.new(:king),
+		self.new(:ace)
+	]
 end
