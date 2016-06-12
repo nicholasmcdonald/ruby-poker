@@ -5,8 +5,16 @@ class Suit
 		@name = name
 	end
 
-	def self.get(search_suit)
+	def self.is(search_suit)
 		ALL.find { |suit| suit.name == search_suit }
+	end
+
+	def value
+		ALL.find_index self
+	end
+
+	def unicode_offset
+		16 * value
 	end
 
 	ALL = [

@@ -7,7 +7,7 @@ class Rank
 		@name = name
 	end
 
-	def self.get(search_rank)
+	def self.is(search_rank)
 		ALL.find { |rank| rank.name == search_rank }
 	end
 
@@ -17,6 +17,12 @@ class Rank
 
 	def <=>(other)
 		value <=> other.value
+	end
+
+	def unicode_offset
+		if (self.name == :ace) then return 1
+		elsif (self.value > Rank.is(:jack).value) then return value + 3
+		else return value + 2 end
 	end
 
 	ALL = [
