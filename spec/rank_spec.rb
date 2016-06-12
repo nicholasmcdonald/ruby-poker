@@ -66,4 +66,36 @@ describe Rank do
 			end
 		end
 	end
+
+	describe "#offset_by" do
+		context "given a king offset by -1" do
+			it "returns the Rank queen" do
+				expect(Rank.is(:king).offset_by(-1)).to eq Rank.is(:queen)
+			end
+		end
+
+		context "given a two offset by 11" do
+			it "returns the Rank king" do
+				expect(Rank.is(:two).offset_by(11)).to eq Rank.is(:king)
+			end
+		end
+
+		context "given a five offset by -4" do
+			it "returns the Rank ace" do
+				expect(Rank.is(:five).offset_by(-4)).to eq Rank.is(:ace)
+			end
+		end
+
+		context "given a jack offset by 10" do
+			it "returns nil" do
+				expect(Rank.is(:jack).offset_by(10)).to be_nil
+			end
+		end
+
+		context "given a king offset by 1" do
+			it "returns the Rank ace" do
+				expect(Rank.is(:king).offset_by(1)).to eq Rank.is(:ace)
+			end
+		end
+	end
 end

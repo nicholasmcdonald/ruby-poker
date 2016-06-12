@@ -25,6 +25,15 @@ class Rank
 		else return value + 2 end
 	end
 
+	def offset_by(offset)
+		target = self.value + offset
+		if target == -1
+			Rank.is(:ace)
+		elsif target.between?(0,12)
+			ALL[self.value + offset]
+		end
+	end
+
 	ALL = [
 		self.new(:two),
 		self.new(:three),
