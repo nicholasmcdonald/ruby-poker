@@ -41,4 +41,14 @@ describe Card do
 			end
 		end
 	end
+
+	describe "==" do
+		context "given a Card with the same rank and suit" do
+			it "considers them equal" do
+				card1 = Card.new(Rank.is(:five), Suit.is(:clubs))
+				card2 = Card.new(Rank.is(:five), Suit.is(:clubs))
+				expect(card1).to eq card2
+			end
+		end
+	end
 end

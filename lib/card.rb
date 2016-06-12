@@ -11,4 +11,9 @@ class Card
 		base_unicode_value = 0x1F0A0
 		base_unicode_value + rank.unicode_offset + suit.unicode_offset
 	end
+
+	def ==(other)
+		if !other.is_a? Card then return false end
+		rank == other.rank && suit == other.suit
+	end
 end
