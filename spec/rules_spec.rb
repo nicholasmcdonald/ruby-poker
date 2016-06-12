@@ -22,7 +22,7 @@ describe Rules do
 		end
 
 		context "given a pile missing two fives" do
-			it "finds the other two fives" do
+			it "finds the other two" do
 				table = Table.new
 				rank = Rank.is :five
 				card = Card.new(rank, Suit.is(:clubs))
