@@ -1,8 +1,8 @@
 class Card
 	attr_reader :rank, :suit
-	attr_accessor :is_in_play
 
 	def initialize(rank, suit)
+		if (!rank.is_a? Rank) || (!suit.is_a? Suit) then raise ArgumentError end
 		@rank = rank
 		@suit = suit
 	end

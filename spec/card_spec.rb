@@ -30,4 +30,15 @@ describe Card do
 			end
 		end
 	end
+
+	describe ".new" do
+		context "given an invalid rank or suit" do
+			it "raises an ArgumentError" do
+				expect { Card.new(0, Suit.is(:clubs)) }
+					.to raise_error(ArgumentError)
+				expect { Card.new(Rank.is(:nine), "a") }
+					.to raise_error(ArgumentError)
+			end
+		end
+	end
 end
