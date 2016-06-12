@@ -27,10 +27,8 @@ class Rank
 
 	def offset_by(offset)
 		target = self.value + offset
-		if target == -1
-			Rank.is(:ace)
-		elsif target.between?(0,12)
-			ALL[self.value + offset]
+		if (target).between?(-1,12)
+			ALL[target]
 		end
 	end
 
