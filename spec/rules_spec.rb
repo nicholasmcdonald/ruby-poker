@@ -76,9 +76,10 @@ describe Rules do
 
 	describe ".find_flush_in" do
 		context "given a fresh deck" do
-			it "finds all of the clubs" do
-				expect(Rules.find_flush_in(Table.new.undealt_cards).size)
-					.to eq 13
+			it "finds all of the spades" do
+				flush = Rules.find_flush_in(Table.new.undealt_cards)
+				expect(flush.size).to eq 13
+				expect(flush[0].has_suit? Suit.is(:spades)).to be true
 			end
 		end
 	end
