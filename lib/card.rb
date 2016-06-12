@@ -16,4 +16,8 @@ class Card
 		if !other.is_a? Card then return false end
 		rank == other.rank && suit == other.suit
 	end
+
+	def has_rank?(rank)
+		@rank == rank
+	end
 end
