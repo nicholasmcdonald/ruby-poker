@@ -20,4 +20,8 @@ class Card
 	def has_rank?(rank)
 		@rank == rank
 	end
+
+	def has_suit?(suit)
+		@suit == suit
+	end
 end
