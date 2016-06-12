@@ -24,10 +24,12 @@ class Card
 	end
 
 	def has_rank?(rank)
+		if !rank.is_a? Rank then return false end
 		@rank == rank
 	end
 
 	def has_suit?(suit)
+		if !suit.is_a? Suit then return false end
 		@suit == suit
 	end
 end
