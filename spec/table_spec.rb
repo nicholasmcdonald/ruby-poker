@@ -51,6 +51,28 @@ describe Table do
 					.to(nil)
 			end
 		end
+
+		context "given a card that matches another in rank but not suit" do
+			it "removes nothing" do
+				table = Table.new
+				card = Card.new(Rank.is(:five), Suit.is(:hearts))
+				table.add_community_card_at(card, 4)
+				card = Card.new(Rank.is(:five), Suit.is(:spades))
+				expect { table.add_hole_card_at(card, 0) }
+					.not_to change { table.community_cards[4] }
+			end
+		end
+
+		context "given a card that matches another in suit but not rank" do
+			it "removes nothing" do
+				table = Table.new
+				card = Card.new(Rank.is(:five), Suit.is(:hearts))
+				table.add_community_card_at(card, 4)
+				card = Card.new(Rank.is(:six), Suit.is(:hearts))
+				expect { table.add_hole_card_at(card, 0) }
+					.not_to change { table.community_cards[4] }
+			end
+		end
 	end
 
 	describe "#cards_in_play" do
