@@ -213,6 +213,13 @@ describe Rules do
 	end
 
 	describe ".find_candidate_straights" do
+		context "given no cards" do
+			it "returns nil" do
+				expect(Rules.find_candidate_straights(0, Table.new.undealt_cards))
+					.to be_empty
+			end
+		end
+
 		context "given seven cards packaged by duplicates" do
 			it "collects all possible straights" do
 				table = Table.new

@@ -9,13 +9,13 @@ module Rules
 	end
 
 	def self.find_candidate_straights(length, pile)
+		return Array.new if length <= 0
 		package_duplicates(pile).each_cons(length)
 			.select(&method(:connected?))
 	end
 
 	def self.package_duplicates(pile)
-		pile.collect(&:rank)
-			.sort.reverse.uniq
+		pile.collect(&:rank).sort.reverse.uniq
 			.collect{|rank| find_ranked_in(rank, pile)}
 	end
 
@@ -24,22 +24,6 @@ module Rules
 			slot[0].has_rank? candidate[i][0].rank.offset_by(-1)
 		}
 	end
-
-	# Obsolete!
-	# def self.find_connected_in(length, pile)
-	# 	pile.sort.reverse.each do |high_card|
-	# 		connected_cards = Array.new
-	# 		(0...length).each do |offset|
-	# 			check_rank = high_card.rank.offset_by -offset
-	# 			matches = find_ranked_in(check_rank, pile)
-	# 			break unless matches.size > 0
-	# 			connected_cards.concat matches
-	# 			return connected_cards if offset == length - 1
-	# 		end
-	# 	end
-
-	# 	return Array.new
-	# end
 
 	def self.find_ranked_in(rank, pile)
 		pile.select{|card| card.has_rank? rank}
