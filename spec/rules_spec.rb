@@ -230,8 +230,7 @@ describe Rules do
 				table.add_hole_card_at(card, 1)
 				card = Card.new(Rank.is(:ace), Suit.is(:clubs))
 				table.add_community_card_at(card, 4)
-				packages = Rules.package_duplicates(table.cards_in_play)
-				results = Rules.find_candidate_straights(5, packages)
+				results = Rules.find_candidate_straights(5, table.cards_in_play)
 				expect(results.size).to eq 2
 				expect(results[0].size).to eq 5
 				expect(results[0][0][0].rank).to eq Rank.is(:ace)
