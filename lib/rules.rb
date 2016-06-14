@@ -1,17 +1,18 @@
 module Rules
 	def self.find_multiples_in(desired_matches, pile)
-		pile.each do |card|
-			matches = find_ranked_in(card.rank, pile)
-			return matches if matches.size >= desired_matches
-		end
+		raise ArgumentError unless 
+			desired_matches.is_a?(Integer) && pile.is_a?(Array)
 
-		return Array.new
+		pile.collect{|card| find_ranked_in(card.rank, pile)}
+			.find{|matches| matches.size >= desired_matches} || Array.new
 	end
 
 	def self.find_candidate_straights(length, pile)
-		return Array.new if length <= 0
+		raise ArgumentError unless 
+			length.is_a?(Integer) && pile.is_a?(Array) && (length > 1)
+
 		package_duplicates(pile).each_cons(length)
-			.select(&method(:connected?))
+			.select(&method(:connected?)) || Array.new
 	end
 
 	def self.package_duplicates(pile)
@@ -20,9 +21,8 @@ module Rules
 	end
 
 	def self.connected?(candidate)
-		candidate.drop(1).each_with_index.all? { |slot, i|
-			slot[0].has_rank? candidate[i][0].rank.offset_by(-1)
-		}
+		candidate.drop(1).each_with_index.all? {
+			|slot, i| slot[0].has_rank? candidate[i][0].rank.offset_by(-1) }
 	end
 
 	def self.find_ranked_in(rank, pile)

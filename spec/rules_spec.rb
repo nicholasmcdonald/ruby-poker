@@ -36,7 +36,7 @@ describe Rules do
 		end
 	end
 
-	describe ".find_multiples" do
+	describe ".find_multiples_in" do
 		context "given an empty pile and 1 desired match" do
 			it "finds no matches" do
 				table = Table.new
@@ -213,10 +213,17 @@ describe Rules do
 	end
 
 	describe ".find_candidate_straights" do
-		context "given no cards" do
-			it "returns nil" do
-				expect(Rules.find_candidate_straights(0, Table.new.undealt_cards))
-					.to be_empty
+		context "given a request for zero-length straights" do
+			it "raises an exception" do
+				expect{Rules.find_candidate_straights(0, Table.new.undealt_cards)}
+					.to raise_error ArgumentError
+			end
+		end
+
+		context "given an invalid pile" do
+			it "raises an exception" do
+				expect{Rules.find_candidate_straights(5, nil)}
+					.to raise_error ArgumentError
 			end
 		end
 
