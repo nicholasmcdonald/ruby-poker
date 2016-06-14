@@ -5,24 +5,21 @@ class Table
 	def initialize
 		@community_cards = Array.new
 		@hole_cards = Array.new
+		@deck = Table.generate_deck
 	end
 
 	def add_community_card_at(card, index)
-		if (!index.between?(0,4)) || (!card.is_a? Card)
-			raise ArgumentError
-		else 
-			remove_duplicate(card)
-			@community_cards[index] = card
-		end
+		raise ArgumentError unless index.between?(0,4) && card.is_a?(Card)
+
+		remove_duplicate card
+		@community_cards[index] = card
 	end
 
 	def add_hole_card_at(card, index)
-		if (!index.between?(0,1)) || (!card.is_a? Card)
-			raise ArgumentError
-		else 
-			remove_duplicate(card)
-			 @hole_cards[index] = card 
-		end
+		raise ArgumentError unless index.between?(0,1) && card.is_a?(Card)
+
+		remove_duplicate card
+		@hole_cards[index] = card
 	end
 
 	def cards_in_play
@@ -30,7 +27,7 @@ class Table
 	end
 
 	def undealt_cards
-		Table.generate_deck.reject{|card| cards_in_play.include? card}
+		@deck.reject{|card| cards_in_play.include? card}
 	end
 
 	def self.generate_deck
