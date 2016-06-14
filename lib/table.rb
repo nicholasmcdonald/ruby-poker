@@ -34,13 +34,7 @@ class Table
 	end
 
 	def self.generate_deck
-		all_cards = Array.new
-		Rank::ALL.each do |rank|
-			Suit::ALL.each do |suit|
-				all_cards << Card.new(rank, suit)
-			end
-		end
-		return all_cards
+		Rank::ALL.product(Suit::ALL).collect{|rank, suit| Card.new(rank, suit)}
 	end
 
 	def remove_duplicate(card)
